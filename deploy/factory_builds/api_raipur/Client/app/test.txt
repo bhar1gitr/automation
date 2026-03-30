@@ -1,0 +1,142 @@
+// import { Link } from "expo-router";
+// import { Text, View } from "react-native";
+
+// export default function Index() {
+//   return (
+//     <View className="flex-1 justify-center items-center">
+//       <Text className="text-5xl text-dark-200 font-bold">Welcome!</Text>
+//       <Link href="/onboarding">Onboarding</Link>
+//       <Link href={"/movie/test" as any}>Avendure Movie</Link>
+//     </View>
+//   );
+// }
+import React from 'react';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const DATA = [
+  { id: '1', title: 'बूथ वोटिंग', iconName: 'vote-outline' },
+  { id: '2', title: 'मतदान केलेले मतदार', iconName: 'clipboard-check-outline' },
+  { id: '3', title: 'अपलोड यादी', iconName: 'file-upload-outline' },
+];
+
+const DashboardItem = ({ title, iconName }) => (
+  <TouchableOpacity style={styles.card}>
+    <Icon name={iconName} size={50} color="#FF6600" />
+    <Text style={styles.cardText}>{title}</Text>
+  </TouchableOpacity>
+);
+
+export default function ElectionDashboard() {
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Banner Image */}
+      <Image source={require('../assets/images/banner.webp')} style={styles.banner} />
+      
+      {/* Main Orange Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>ठाणे महानगरपालिका</Text>
+      </View>
+
+      {/* VERSION & DATE SECTION */}
+      <View style={styles.infoBar}>
+        <Text style={styles.infoLabel}>
+          आवृत्ती : <Text style={styles.infoValue}>3.9</Text>
+        </Text>
+        <Text style={styles.infoLabel}>
+          प्रकाशन दिनांक : <Text style={styles.infoValue}>19-12-2025</Text>
+        </Text>
+      </View>
+
+      <FlatList
+        data={DATA}
+        renderItem={({ item }) => (
+          <DashboardItem title={item.title} iconName={item.iconName} />
+        )}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        contentContainerStyle={styles.gridPadding}
+      />
+
+      {/* --- BOTTOM NAVIGATION BAR --- */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="home-outline" size={24} color="#666" />
+          <Text style={styles.navText}>होम</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="account-search-outline" size={24} color="#666" />
+          <Text style={styles.navText}>मतदार शोधा</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="account-plus-outline" size={24} color="#FF6600" />
+          <Text style={[styles.navText, {color: '#FF6600'}]}>वोटिंग</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="chart-bar" size={24} color="#666" />
+          <Text style={styles.navText}>रिपोर्ट</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="sync" size={24} color="#666" />
+          <Text style={styles.navText}>sync</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#fff' },
+  banner: { width: '100%', height: 180, resizeMode: 'cover' },
+  header: { backgroundColor: '#FF6600', padding: 15 },
+  headerText: { color: '#fff', fontSize: 18, fontWeight: 'bold', textAlign: 'left', paddingLeft: 10 },
+  
+  infoBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: '#fff',
+  },
+  infoLabel: { fontSize: 14, color: '#333', fontWeight: '500' },
+  infoValue: { color: '#D35400', fontWeight: 'bold' },
+
+  card: {
+    flex: 0.5,
+    margin: 10,
+    paddingVertical: 25,
+    borderWidth: 2,
+    borderColor: '#FF6600',
+    borderRadius: 20,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  cardText: { marginTop: 12, fontWeight: 'bold', fontSize: 14, textAlign: 'center', color: '#000' },
+  gridPadding: { paddingHorizontal: 10, paddingTop: 10 },
+
+  // Bottom Navigation Styles
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 70,
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    backgroundColor: '#fff',
+    paddingBottom: 10, // Adjust for safe areas
+  },
+  navItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  navText: {
+    fontSize: 10,
+    marginTop: 4,
+    color: '#666',
+  },
+});

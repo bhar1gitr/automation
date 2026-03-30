@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Voter Admin</h2>
+            </div>
+            <ul class="nav-links" id="main-nav">
+                </ul>
+            <div class="sidebar-footer">
+                <button onclick="window.close()" id="logout-btn" class="btn-logout"></button>
+            </div>
+        </nav>
+
+        <main id="content-area">
+            <div class="loader">Loading...</div>
+        </main>
+    </div>
+
+    <script src="src/i18n.js"></script>
+    <script src="src/dashboard.js"></script>
+    <script src="src/area.js"></script>
+    <script src="src/voters.js"></script>
+    <script src="src/booth.js"></script>
+    <script src="src/settings.js"></script>
+    <script src="src/db-local.js"></script>
+    <script src="src/sync.js"></script>
+
+    <script src="src/router.js"></script>
+
+    <script>
+        function renderUI() {
+            // Translate Sidebar
+            const nav = document.getElementById('main-nav');
+            nav.innerHTML = `
+                <li onclick="Router.load('dashboard')" id="nav-dashboard">📊 ${i18n.t('dashboard')}</li>
+                <li onclick="Router.load('area')" id="nav-area">📍 ${i18n.t('areas') || 'Areas'}</li>
+                <li onclick="Router.load('voters')" id="nav-voters">👥 ${i18n.t('voters')}</li>
+                <li onclick="Router.load('booth')" id="nav-booth">🏗️ ${i18n.t('booths')}</li>
+                <li onclick="Router.load('sync')" id="nav-sync">🔄 ${i18n.t('sync')}</li> 
+                <li onclick="Router.load('settings')" id="nav-settings">⚙️ ${i18n.t('settings')}</li> 
+            `;
+
+            // Translate Static Buttons
+            document.getElementById('logout-btn').innerText = i18n.t('logout');
+        }
+        
+        window.onload = () => {
+            renderUI();
+            Router.load('dashboard');
+        };
+    </script>
+</body>
+</html>

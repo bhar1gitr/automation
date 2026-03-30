@@ -1,0 +1,38 @@
+{
+  "name": "voter-admin",
+  "version": "1.0.0",
+  "description": "Voter Admin Panel Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^41.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
+  },
+  "build": {
+    "appId": "com.voter.admin",
+    "productName": "Voter Admin Panel",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Voter Admin Panel"
+    }
+  }
+}
