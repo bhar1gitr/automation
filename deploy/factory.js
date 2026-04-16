@@ -4,7 +4,9 @@ const { execSync, spawn } = require('child_process');
 const archiver = require('archiver');
 const mongoose = require('mongoose');
 
-const GITHUB_REPO = 'https://github.com/bhar1gitr/purna.git';
+// const GITHUB_REPO = 'https://github.com/bhar1gitr/purna.git';
+const GITHUB_REPO = 'https://github.com/Netrutv/purna.git';
+
 const BUILD_ROOT = path.join(__dirname, 'factory_builds');
 
 // --- EMBEDDED SCHEMAS (Matches your screenshot exactly) ---
@@ -43,7 +45,9 @@ async function generateCityBuild({ cityName, mongoUri, packageId, voterData }) {
     const dbName = `${safeName}-db`;
     
     // Your specific Atlas Cluster URL
-    const finalMongoUri = `mongodb+srv://bharatsharma:BharatRaipur2026@users.zhyvuoo.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+    // const finalMongoUri = `mongodb+srv://bharatsharma:BharatRaipur2026@users.zhyvuoo.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+
+    const finalMongoUri = `mongodb+srv://netrutv:Netrutv39@basic.mtdr6.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
     try {
         await fs.ensureDir(BUILD_ROOT);
